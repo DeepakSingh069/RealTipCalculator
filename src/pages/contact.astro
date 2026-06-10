@@ -24,7 +24,7 @@ import PageLayout from "../layouts/PageLayout.astro";
             icon: "✉️",
             title: "Email Us",
             value: "info@elevenxsolutions.com",
-            href: "mailto:info@elevenxsolutions.com",
+            href: "mailto:lifeturningpoint@gmail.com",
           },
           {
             icon: "🌐",
@@ -92,11 +92,15 @@ import PageLayout from "../layouts/PageLayout.astro";
 
       <form
         id="contact-form"
-        action="mailto:hello@realtipcalculator.com"
-        method="POST"
-        enctype="text/plain"
         style="display:flex; flex-direction:column; gap:20px;"
       >
+        <!-- Status message container -->
+        <div
+          id="form-status"
+          style="display:none; padding:12px 16px; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; text-align:center;"
+        >
+        </div>
+
         <div
           style="display:grid; grid-template-columns:1fr 1fr; gap:20px;"
           id="name-email-row"
@@ -318,3 +322,70 @@ import PageLayout from "../layouts/PageLayout.astro";
     }
   }
 </style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const submitBtn = document.getElementById(
+    "contact-submit",
+  ) as HTMLButtonElement;
+  const statusDiv = document.getElementById("form-status") as HTMLDivElement;
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Update UI to loading state
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = "Sending...";
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = "0.7";
+      submitBtn.style.cursor = "not-allowed";
+
+      statusDiv.style.display = "none";
+
+      // Gather form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        statusDiv.style.display = "block";
+
+        if (response.ok) {
+          // Success
+          statusDiv.style.backgroundColor = "rgba(16, 185, 129, 0.1)";
+          statusDiv.style.border = "1px solid #10b981";
+          statusDiv.style.color = "#059669";
+          statusDiv.innerText = "✅ Your message has been sent successfully!";
+          form.reset();
+        } else {
+          // Server error
+          statusDiv.style.backgroundColor = "rgba(239, 68, 68, 0.1)";
+          statusDiv.style.border = "1px solid #ef4444";
+          statusDiv.style.color = "#dc2626";
+          statusDiv.innerText = `❌ Error: ${result.error || "Failed to send message."}`;
+        }
+      } catch (error) {
+        // Network/Client error
+        statusDiv.style.display = "block";
+        statusDiv.style.backgroundColor = "rgba(239, 68, 68, 0.1)";
+        statusDiv.style.border = "1px solid #ef4444";
+        statusDiv.style.color = "#dc2626";
+        statusDiv.innerText = "❌ A network error occurred. Please try again.";
+      } finally {
+        // Reset button
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+        submitBtn.style.cursor = "pointer";
+      }
+    });
+  }
+</script>

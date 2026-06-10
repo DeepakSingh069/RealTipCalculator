@@ -2,10 +2,15 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://realtipcalculator.com',
+  adapter: cloudflare({
+    imageService: 'passthrough',
+    prerenderEnvironment: 'node'
+  }),
 
   integrations: [
     sitemap({
@@ -21,9 +26,11 @@ export default defineConfig({
       lastmod: new Date(),
 
       // Fine-tune priority per route
+      // @ts-ignore
       serialize(item) {
         // Homepage gets top priority
         if (item.url === 'https://realtipcalculator.com/') {
+          // @ts-ignore
           return { ...item, priority: 1.0, changefreq: 'daily' };
         }
         // Legal pages change rarely
@@ -31,10 +38,12 @@ export default defineConfig({
           item.url.includes('/privacy-policy') ||
           item.url.includes('/terms')
         ) {
+          // @ts-ignore
           return { ...item, priority: 0.3, changefreq: 'yearly' };
         }
         // About + Contact — moderate priority
         if (item.url.includes('/about') || item.url.includes('/contact')) {
+          // @ts-ignore
           return { ...item, priority: 0.5, changefreq: 'monthly' };
         }
         return item;
