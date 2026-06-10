@@ -1,0 +1,364 @@
+---
+// CountryGuide — Searchable country tipping guide with mobile "See more" collapse
+const countries = [
+  { flag:"🇺🇸", name:"United States",     range:"15–25%", norm:"Expected",    note:"Tipping is deeply ingrained. Always tip servers, taxi, hairdressers." },
+  { flag:"🇬🇧", name:"United Kingdom",    range:"10–15%", norm:"Common",      note:"Service charge often added. Skip extra if already included." },
+  { flag:"🇨🇦", name:"Canada",            range:"15–20%", norm:"Expected",    note:"Similar culture to the US. Tip in restaurants, taxis, and bars." },
+  { flag:"🇦🇺", name:"Australia",         range:"0–10%",  norm:"Optional",    note:"Tipping not expected. Good service might earn 5–10%." },
+  { flag:"🇩🇪", name:"Germany",           range:"5–10%",  norm:"Common",      note:"Round up the bill or leave small change. Tip goes directly to server." },
+  { flag:"🇫🇷", name:"France",            range:"5–10%",  norm:"Common",      note:"Service included by law (15%). Extra tip appreciated but never required." },
+  { flag:"🇯🇵", name:"Japan",             range:"0%",     norm:"Not Customary",note:"Tipping can be considered rude. Exceptional service is its own reward." },
+  { flag:"🇨🇳", name:"China",             range:"0%",     norm:"Rare",        note:"Not traditional. High-end hotels may accept tips from foreign tourists." },
+  { flag:"🇮🇳", name:"India",             range:"10–15%", norm:"Appreciated", note:"Tip staff directly. Hotel staff expect 50–100 INR per service." },
+  { flag:"🇧🇷", name:"Brazil",            range:"10%",    norm:"Common",      note:"Service charge (gorjeta) usually added. Extra tip always welcomed." },
+  { flag:"🇲🇽", name:"Mexico",            range:"10–20%", norm:"Expected",    note:"Very similar to US norms. Always tip waiters, drivers, hotel staff." },
+  { flag:"🇮🇹", name:"Italy",             range:"5–10%",  norm:"Optional",    note:"Coperto (cover charge) already on bill. Extra tip shows appreciation." },
+  { flag:"🇪🇸", name:"Spain",             range:"5–10%",  norm:"Optional",    note:"Not mandatory but appreciated. Round up for good service." },
+  { flag:"🇳🇱", name:"Netherlands",       range:"5–10%",  norm:"Optional",    note:"No tipping culture. Round up the bill to show appreciation." },
+  { flag:"🇸🇪", name:"Sweden",            range:"5–10%",  norm:"Optional",    note:"Not expected. Rounding up is the common way to tip." },
+  { flag:"🇺🇦", name:"UAE (Dubai)",       range:"10–15%", norm:"Appreciated", note:"Not mandatory. High-end venues may include service charge." },
+  { flag:"🇸🇬", name:"Singapore",         range:"0–10%",  norm:"Rare",        note:"10% service charge usually added automatically." },
+  { flag:"🇹🇭", name:"Thailand",          range:"10–20%", norm:"Appreciated", note:"Not required but warmly received. Tip hotel staff and guides." },
+  { flag:"🇬🇷", name:"Greece",            range:"5–10%",  norm:"Common",      note:"Rounding up or leaving 5–10% is standard at restaurants." },
+  { flag:"🇹🇷", name:"Turkey",            range:"5–15%",  norm:"Common",      note:"Expected at restaurants, especially tourist areas." },
+  { flag:"🇵🇹", name:"Portugal",          range:"5–10%",  norm:"Optional",    note:"Service often included. Leave small change or 5% extra." },
+  { flag:"🇦🇷", name:"Argentina",         range:"10–15%", norm:"Expected",    note:"Expected in restaurants. Tip in local currency." },
+  { flag:"🇰🇷", name:"South Korea",       range:"0%",     norm:"Rare",        note:"Tipping is unusual and sometimes refused. Not expected at all." },
+  { flag:"🇷🇺", name:"Russia",            range:"10%",    norm:"Appreciated", note:"Growing tipping culture, especially in Moscow and St. Petersburg." },
+  { flag:"🇮🇩", name:"Indonesia",         range:"10%",    norm:"Appreciated", note:"Service charge often added. Tip guides and drivers separately." },
+  { flag:"🇵🇭", name:"Philippines",       range:"10%",    norm:"Appreciated", note:"Common in restaurants. Tip staff directly for better reach." },
+  { flag:"🇿🇦", name:"South Africa",      range:"10–15%", norm:"Expected",    note:"Expected at restaurants. 10–15% is standard." },
+  { flag:"🇪🇬", name:"Egypt",             range:"10–15%", norm:"Expected",    note:"Baksheesh (tip) culture is strong. Always carry small bills." },
+  { flag:"🇨🇭", name:"Switzerland",       range:"0–5%",   norm:"Optional",    note:"Wages are high. Rounding up is appreciated, not obligatory." },
+  { flag:"🇳🇿", name:"New Zealand",       range:"0–10%",  norm:"Optional",    note:"Not expected. Leave only for outstanding service." },
+];
+
+const MOBILE_INITIAL = 6; // cards shown before "See more" on mobile
+
+const normColors: Record<string, { bg: string; color: string }> = {
+  "Expected":      { bg: "#f0fdf4", color: "#16a34a" },
+  "Common":        { bg: "#eff6ff", color: "#2563eb" },
+  "Optional":      { bg: "#f5f5f5", color: "#6b7280" },
+  "Appreciated":   { bg: "#fff7ed", color: "#c2410c" },
+  "Rare":          { bg: "#faf5ff", color: "#7c3aed" },
+  "Not Customary": { bg: "#fef2f2", color: "#dc2626" },
+};
+---
+
+<section
+  id="country-guide"
+  style="
+    background-color: #fcfaff;
+    padding: 96px 0;
+  "
+>
+  <div class="container-site">
+
+    <!-- Section header -->
+    <div style="text-align: center; margin-bottom: 48px;">
+      <div style="margin-bottom: 16px;">
+        <span
+          class="section-label"
+          style="
+            display: inline-flex;
+            background-color: #f3e8ff;
+            color: #7e22ce;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 9999px;
+          "
+        >🌍 Global Tipping Guide</span>
+      </div>
+      <h2
+        style="
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(28px, 3.5vw, 40px);
+          font-weight: 800;
+          color: #1e1b4b;
+          letter-spacing: -1px;
+          margin: 16px 0;
+          line-height: 1.1;
+        "
+      >Tipping norms around the world</h2>
+      <p
+        style="
+          font-family: 'DM Sans', sans-serif;
+          font-size: 17px;
+          color: #6b7280;
+          max-width: 480px;
+          margin: 0 auto 32px;
+          line-height: 1.6;
+        "
+      >Know what's expected before you travel. Local customs vary widely.</p>
+
+      <!-- Search -->
+      <div style="max-width: 400px; margin: 0 auto; position: relative;">
+        <div style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#6b7280; pointer-events:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <input
+          type="text"
+          id="country-search"
+          placeholder="Search countries..."
+          aria-label="Search countries"
+          style="
+            width: 100%;
+            background-color: #faf8ff;
+            color: #1e1b4b;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            padding: 10px 14px 10px 40px;
+            height: 46px;
+            border-radius: 10px;
+            border: 1.5px solid #e9d5ff;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            box-sizing: border-box;
+          "
+          onfocus="this.style.borderColor='#7c3aed'; this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.1)';"
+          onblur="this.style.borderColor='#e9d5ff'; this.style.boxShadow='none';"
+        />
+      </div>
+    </div>
+
+    <!-- Country grid -->
+    <div
+      id="country-grid"
+      style="
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      "
+    >
+      {countries.map((c, index) => {
+        const badge = normColors[c.norm] || normColors["Optional"];
+        return (
+          <div
+            class="country-card"
+            data-country={c.name.toLowerCase()}
+            data-index={index}
+          >
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:28px; line-height:1;">{c.flag}</span>
+                <div>
+                  <div style="font-family:'Manrope',sans-serif; font-size:15px; font-weight:700; color:#111111; letter-spacing:-0.2px;">{c.name}</div>
+                  <div style="font-family:'DM Sans',sans-serif; font-size:20px; font-weight:700; color:#111111; letter-spacing:-0.5px; margin-top:2px;">{c.range}</div>
+                </div>
+              </div>
+              <span
+                style={`
+                  display:inline-flex;
+                  flex-shrink:0;
+                  font-family:'DM Sans',sans-serif;
+                  font-size:11px;
+                  font-weight:600;
+                  padding: 3px 10px;
+                  border-radius:9999px;
+                  background-color:${badge.bg};
+                  color:${badge.color};
+                  white-space:nowrap;
+                  margin-top:4px;
+                `}
+              >{c.norm}</span>
+            </div>
+            <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:#6b7280; margin:0; line-height:1.5;">{c.note}</p>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Empty state -->
+    <div
+      id="country-empty"
+      style="display:none; text-align:center; padding:48px 0; color:#6b7280; font-family:'DM Sans',sans-serif;"
+    >
+      <div style="font-size:40px; margin-bottom:12px;">🔍</div>
+      <div style="font-size:16px; font-weight:500;">No countries found. Try a different search.</div>
+    </div>
+
+    <!-- ── Mobile "See more countries" button ── -->
+    <div id="see-more-wrap" style="display:none; text-align:center; margin-top:24px;">
+      <button
+        id="see-more-btn"
+        aria-expanded="false"
+        style="
+          display: inline-flex; align-items: center; gap: 8px;
+          font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700;
+          color: #7c3aed;
+          background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(124,58,237,0.06));
+          border: 1.5px solid rgba(124,58,237,0.3);
+          padding: 12px 24px; border-radius: 12px; cursor: pointer;
+          transition: all 0.2s ease;
+          width: 100%; max-width: 320px; justify-content: center;
+        "
+      >
+        <svg id="see-more-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+        <span id="see-more-text">See all {countries.length} countries</span>
+      </button>
+      <p id="see-more-count" style="
+        font-family:'DM Sans',sans-serif; font-size:13px; color:#9ca3af; margin:10px 0 0;
+      ">Showing {MOBILE_INITIAL} of {countries.length} countries</p>
+    </div>
+
+  </div>
+</section>
+
+<script define:vars={{ MOBILE_INITIAL }}>
+  const searchInput  = document.getElementById("country-search");
+  const countryCards = document.querySelectorAll(".country-card");
+  const emptyState   = document.getElementById("country-empty");
+  const seeMoreWrap  = document.getElementById("see-more-wrap");
+  const seeMoreBtn   = document.getElementById("see-more-btn");
+  const seeMoreText  = document.getElementById("see-more-text");
+  const seeMoreCount = document.getElementById("see-more-count");
+  const seeMoreIcon  = document.getElementById("see-more-icon");
+
+  let isMobile = false;
+  let expanded = false;
+  const total  = countryCards.length;
+
+  // ── Detect mobile ───────────────────────────────────────────
+  function checkMobile() {
+    isMobile = window.innerWidth <= 600;
+    if (isMobile) {
+      seeMoreWrap.style.display = "block";
+      applyMobileCollapse();
+    } else {
+      seeMoreWrap.style.display = "none";
+      // On desktop, show all cards (reset any hidden state)
+      countryCards.forEach(card => {
+        card.classList.remove("mobile-hidden");
+        card.style.display = "";
+      });
+    }
+  }
+
+  // ── Apply collapse on mobile ─────────────────────────────────
+  function applyMobileCollapse() {
+    if (!isMobile) return;
+    countryCards.forEach((card, i) => {
+      if (expanded || i < MOBILE_INITIAL) {
+        card.classList.remove("mobile-hidden");
+        card.style.display = "";
+      } else {
+        card.classList.add("mobile-hidden");
+        card.style.display = "none";
+      }
+    });
+    updateBtn();
+  }
+
+  function updateBtn() {
+    const shown = expanded ? total : MOBILE_INITIAL;
+    seeMoreText.textContent = expanded
+      ? "Show fewer countries"
+      : `See all ${total} countries`;
+    seeMoreCount.textContent = `Showing ${shown} of ${total} countries`;
+    seeMoreBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+    // Flip chevron
+    seeMoreIcon.style.transform = expanded ? "rotate(180deg)" : "rotate(0deg)";
+  }
+
+  // ── Toggle ───────────────────────────────────────────────────
+  seeMoreBtn.addEventListener("click", () => {
+    expanded = !expanded;
+    applyMobileCollapse();
+    // If collapsing, scroll back up to section
+    if (!expanded) {
+      document.getElementById("country-guide").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+
+  // ── Search — shows all matching, hides see-more during search ─
+  searchInput.addEventListener("input", () => {
+    const q = searchInput.value.toLowerCase().trim();
+    let visible = 0;
+    countryCards.forEach((card) => {
+      const match = card.dataset.country?.includes(q);
+      if (q === "") {
+        // Reset to collapsed/expanded mobile state
+        if (isMobile) {
+          const idx = parseInt(card.dataset.index || "0");
+          card.style.display = (expanded || idx < MOBILE_INITIAL) ? "" : "none";
+        } else {
+          card.style.display = "";
+        }
+        if (card.style.display !== "none") visible++;
+      } else {
+        // During search: show all matches regardless of collapse
+        card.style.display = match ? "" : "none";
+        if (match) visible++;
+      }
+    });
+    emptyState.style.display = visible === 0 ? "block" : "none";
+    // Hide see-more while searching, show when cleared
+    if (isMobile) {
+      seeMoreWrap.style.display = q ? "none" : "block";
+    }
+  });
+
+  // ── Init ─────────────────────────────────────────────────────
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+</script>
+
+<style>
+  @media (max-width: 1024px) {
+    #country-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (max-width: 600px) {
+    #country-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* Smooth expand/collapse animation for mobile cards */
+  .country-card {
+    transition: opacity 0.2s ease;
+  }
+
+  /* See-more button hover */
+  #see-more-btn:hover {
+    background: linear-gradient(135deg, rgba(124,58,237,0.18), rgba(124,58,237,0.1)) !important;
+    border-color: #7c3aed !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(124,58,237,0.2);
+  }
+
+  /* Chevron transition */
+  #see-more-icon {
+    transition: transform 0.2s ease;
+  }
+
+  /* Dark mode */
+  [data-theme="dark"] #country-guide {
+    background-color: #0f0a1e !important;
+  }
+  [data-theme="dark"] #country-guide h2 {
+    color: #ffffff !important;
+  }
+  [data-theme="dark"] .country-card {
+    background: rgba(124,58,237,0.08) !important;
+    border-color: rgba(196,181,253,0.15) !important;
+  }
+  [data-theme="dark"] .country-card div[style*="color:#111111"] {
+    color: #e9d5ff !important;
+  }
+  [data-theme="dark"] .country-card p {
+    color: #8b75d9 !important;
+  }
+  [data-theme="dark"] #see-more-btn {
+    border-color: rgba(167,139,250,0.4) !important;
+    color: #a78bfa !important;
+  }
+  [data-theme="dark"] #see-more-count {
+    color: #5b4b8a !important;
+  }
+</style>

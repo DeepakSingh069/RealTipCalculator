@@ -1,0 +1,168 @@
+---
+// 500.astro — Internal Server Error
+// Generated as /500.html — most static hosts (Netlify, Vercel) can serve this for server errors
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="500 — Something Went Wrong | Real Tip Calculator"
+  description="We encountered an unexpected error. Our team has been notified. Please try again shortly."
+  canonicalPath="/500"
+>
+  <Header />
+
+  <main id="main-content" style="
+    min-height: calc(100vh - 128px);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #0f0a1e 0%, #1a1040 50%, #12093a 100%);
+    position: relative;
+    overflow: hidden;
+  ">
+    <!-- Background orbs -->
+    <div style="position:absolute; top:-80px; right:-80px; width:500px; height:500px;
+      background:radial-gradient(circle, rgba(220,38,38,0.15) 0%, transparent 70%);
+      pointer-events:none;"></div>
+    <div style="position:absolute; bottom:-80px; left:-80px; width:400px; height:400px;
+      background:radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+      pointer-events:none;"></div>
+
+    <div class="container-site" style="position:relative; z-index:1; text-align:center; padding:80px 0;">
+
+      <!-- Big 500 -->
+      <div style="
+        font-family:'Manrope',sans-serif;
+        font-size:clamp(96px, 20vw, 180px);
+        font-weight:800;
+        line-height:1;
+        margin-bottom:8px;
+        background: linear-gradient(135deg, #f87171, #fb923c, #f87171);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing:-4px;
+      ">500</div>
+
+      <!-- Icon -->
+      <div style="font-size:48px; margin-bottom:24px;">⚠️</div>
+
+      <h1 style="
+        font-family:'Manrope',sans-serif;
+        font-size:clamp(24px,4vw,36px);
+        font-weight:800; color:#ffffff;
+        letter-spacing:-0.8px; margin:0 0 16px;
+      ">Something went wrong</h1>
+
+      <p style="
+        font-family:'DM Sans',sans-serif;
+        font-size:17px; color:#8b75d9;
+        max-width:480px; margin:0 auto 12px;
+        line-height:1.65;
+      ">
+        We hit an unexpected snag on our end. This isn't your fault —
+        our team has been notified and we're working on a fix.
+      </p>
+      <p style="
+        font-family:'DM Sans',sans-serif;
+        font-size:15px; color:#5b4b8a;
+        margin:0 auto 40px;
+      ">Please try again in a moment.</p>
+
+      <!-- Action buttons -->
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:40px;">
+        <button
+          onclick="window.location.reload()"
+          style="
+            display:inline-flex; align-items:center; gap:8px;
+            font-family:'DM Sans',sans-serif; font-size:16px; font-weight:700;
+            color:#ffffff;
+            background:linear-gradient(135deg,#7c3aed,#6d28d9);
+            padding:14px 28px; border-radius:12px; border:none; cursor:pointer;
+            box-shadow:0 4px 20px rgba(124,58,237,0.4);
+            transition:all 0.2s ease;
+          "
+          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(124,58,237,0.5)';"
+          onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 20px rgba(124,58,237,0.4)';"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+          </svg>
+          Try Again
+        </button>
+        <a href="/" style="
+          display:inline-flex; align-items:center; gap:8px;
+          font-family:'DM Sans',sans-serif; font-size:16px; font-weight:700;
+          color:#a78bfa;
+          background:rgba(124,58,237,0.12);
+          border:1.5px solid rgba(167,139,250,0.3);
+          padding:14px 28px; border-radius:12px; text-decoration:none;
+          transition:all 0.2s ease;
+        "
+        onmouseover="this.style.background='rgba(124,58,237,0.2)'; this.style.borderColor='rgba(167,139,250,0.6)';"
+        onmouseout="this.style.background='rgba(124,58,237,0.12)'; this.style.borderColor='rgba(167,139,250,0.3)';"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          Go to Home
+        </a>
+      </div>
+
+      <!-- Status indicator -->
+      <div style="
+        display:inline-flex; align-items:center; gap:10px;
+        background:rgba(248,113,113,0.1);
+        border:1px solid rgba(248,113,113,0.2);
+        border-radius:12px; padding:12px 20px;
+        margin-bottom:48px;
+      ">
+        <span style="width:8px;height:8px;background:#f87171;border-radius:50%;display:inline-block;
+          box-shadow:0 0 8px #f87171; animation:blink 1.5s ease-in-out infinite;"></span>
+        <span style="font-family:'DM Sans',sans-serif; font-size:14px; color:#fca5a5; font-weight:500;">
+          Error detected — team notified
+        </span>
+      </div>
+
+      <!-- Quick links -->
+      <div style="border-top:1px solid rgba(196,181,253,0.15); padding-top:40px;">
+        <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:#5b4b8a; margin:0 0 20px; text-transform:uppercase; letter-spacing:1.5px; font-weight:700;">
+          While you wait, try these
+        </p>
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
+          {[
+            ["🧮 Tip Calculator",  "/#hero"],
+            ["🌍 Country Guide",   "/#country-guide"],
+            ["❓ FAQ",             "/#faq"],
+            ["✉️ Contact Us",      "/contact"],
+          ].map(([label, href]) => (
+            <a href={href} style="
+              font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500;
+              color:#8b75d9; text-decoration:none;
+              background:rgba(124,58,237,0.08);
+              border:1px solid rgba(196,181,253,0.15);
+              padding:8px 16px; border-radius:20px;
+              transition:all 0.15s ease;
+            "
+            onmouseover="this.style.color='#c4b5fd'; this.style.borderColor='rgba(196,181,253,0.35)';"
+            onmouseout="this.style.color='#8b75d9'; this.style.borderColor='rgba(196,181,253,0.15)';"
+            >{label}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+  @media (max-width: 600px) {
+    main > div > div { padding: 60px 0 !important; }
+  }
+</style>

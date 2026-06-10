@@ -1,23 +1,189 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalPath?: string;
+}
+
+const {
+  title = "Tip Calculator - No sign-ups needed",
+  description = "Free tip calculator online. Calculate how much to tip at restaurants, nail salons, hair salons & more. Includes bill splitter, service quality slider & tipping guide for 30+ countries.",
+  ogImage = "https://realtipcalculator.com/og-image.png",
+  canonicalPath = "",
+} = Astro.props;
+
+const canonicalURL = `https://realtipcalculator.com${canonicalPath}`;
+
+// JSON-LD Structured Data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://realtipcalculator.com/#website",
+      url: "https://realtipcalculator.com",
+      name: "Real Tip Calculator",
+      description:
+        "Free online tip calculator with bill splitting and global tipping guides.",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://realtipcalculator.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://realtipcalculator.com/#app",
+      name: "Tip Calculator",
+      url: "https://realtipcalculator.com",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Any",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      description:
+        "Free online tip calculator. Calculate the perfect tip for restaurants, nail salons, hairdressers, DoorDash and more. Includes bill splitting and a country tipping guide.",
+      featureList: [
+        "Service quality slider",
+        "Bill splitting for groups",
+        "30+ country tipping guide",
+        "Custom tip percentage",
+        "Round-up suggestions",
+        "Copy breakdown to clipboard",
+      ],
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://realtipcalculator.com/#org",
+      name: "Real Tip Calculator",
+      url: "https://realtipcalculator.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://realtipcalculator.com/favicon-96x96.png",
+      },
+    },
+  ],
+};
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!-- ── Favicons (required for Google Search icon) ── -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ⚡ Anti-flash theme init — runs before any paint -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("rtc-theme");
+          // Default is always light — stored preference overrides for returning users
+          var theme = stored || "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- ── Primary SEO ── -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta
+      name="keywords"
+      content="tip calculator, tip calculator google, google tip calculator, tip calculator how much to tip, restaurant tip calculator, tip calculator iphone, tip calculator app, simple tip calculator, online tip calculator, tattoo tip calculator, nail salon tip calculator, tax and tip calculator, free tip calculator, hairdresser tip calculator, tip calculator formula, doordash tip calculator"
+    />
+    <meta name="author" content="Real Tip Calculator" />
+    <meta name="language" content="English" />
+
+    <!-- ── Open Graph (Facebook, LinkedIn, WhatsApp, etc.) ── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Real Tip Calculator" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Real Tip Calculator — Free Online Tip Calculator"
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ── Twitter Card ── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@realtipcalc" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Real Tip Calculator" />
+
+    <!-- ── Additional SEO signals ── -->
+    <meta name="theme-color" content="#7c3aed" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- ── Favicon ── -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Real Tip" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ── JSON-LD Structured Data ── -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- ── Preconnect for performance ── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- ── Sitemap discovery ── -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- ── Google Analytics (GA4) ── -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <script
+      async
+      data-cfasync="false"
+      src="https://www.googletagmanager.com/gtag/js?id=G-RXJYV81RGB"
+      is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-RXJYV81RGB");
+    </script>
+
+    <!-- ── Google AdSense ── -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <script
+      async
+      data-cfasync="false"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5694324454542137"
+      crossorigin="anonymous"
+      is:inline></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

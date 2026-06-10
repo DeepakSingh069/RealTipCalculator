@@ -1,0 +1,129 @@
+---
+// Footer — Deep midnight indigo to match hero
+const footerLinks = {
+  Calculator: [
+    { label: "Tip Calculator",        href: "/#hero" },
+    { label: "Bill Splitter",         href: "/#hero" },
+    { label: "Country Tipping Guide", href: "/#country-guide" },
+    { label: "How It Works",          href: "/#how-it-works" },
+    { label: "FAQ",                   href: "/#faq" },
+  ],
+  Learn: [
+    { label: "US Tipping Customs",    href: "/#country-guide" },
+    { label: "International Tipping", href: "/#country-guide" },
+    { label: "Tipping Etiquette",     href: "/#faq" },
+    { label: "About Tipping",         href: "/#seo-content" },
+  ],
+  Company: [
+    { label: "About Us",              href: "/about" },
+    { label: "Contact Us",            href: "/contact" },
+    { label: "Privacy Policy",        href: "/privacy-policy" },
+    { label: "Terms & Conditions",    href: "/terms" },
+  ],
+};
+---
+
+<footer style="
+  background: linear-gradient(180deg, #0f0a1e 0%, #1a1040 100%);
+  padding: 72px 0 40px; color: #c4b5fd;
+  border-top: 1px solid rgba(196,181,253,0.1);
+">
+  <div class="container-site">
+
+    <!-- Grid -->
+    <div id="footer-grid" style="
+      display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr;
+      gap:48px; padding-bottom:48px;
+      border-bottom:1px solid rgba(196,181,253,0.1); margin-bottom:32px;
+    ">
+      <!-- Brand -->
+      <div>
+        <a href="/" aria-label="Real Tip Calculator" style="
+          display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:16px;
+        ">
+          <img
+            src="/favicon-96x96.png"
+            alt="Real Tip Calculator logo"
+            width="32"
+            height="32"
+            style="
+              width:32px; height:32px; border-radius:8px; flex-shrink:0;
+              box-shadow:0 4px 12px rgba(124,58,237,0.4);
+              display:block;
+            "
+          />
+          <span style="font-family:'Manrope',sans-serif; font-size:15px; font-weight:800; color:#ffffff; letter-spacing:-0.3px;">
+            Real Tip Calculator
+          </span>
+        </a>
+
+        <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:#8b75d9; line-height:1.65; margin:0 0 20px; max-width:240px;">
+          The fastest, most accurate tip calculator online. Free forever, no account needed.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          {["100% Free","No Signup","Works Offline"].map(b => (
+            <span style="
+              font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600;
+              color:#8b75d9; background:rgba(124,58,237,0.15);
+              border:1px solid rgba(196,181,253,0.2);
+              padding:4px 12px; border-radius:9999px;
+            ">{b}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Link columns -->
+      {Object.entries(footerLinks).map(([heading, links]) => (
+        <div>
+          <h3 style="
+            font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700;
+            color:#c4b5fd; text-transform:uppercase; letter-spacing:1px; margin:0 0 16px;
+          ">{heading}</h3>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+            {links.map(l => (
+              <li>
+                <a href={l.href} style="
+                  font-family:'DM Sans',sans-serif; font-size:14px;
+                  color:#8b75d9; text-decoration:none; transition:color 0.15s ease;
+                "
+                onmouseover="this.style.color='#c4b5fd';"
+                onmouseout="this.style.color='#8b75d9';"
+                >{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <span style="font-family:'DM Sans',sans-serif; font-size:13px; color:#6b5a99;">
+        © {new Date().getFullYear()} realtipcalculator.com — Free to use, forever.
+      </span>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        {[
+          { label: "Privacy Policy",     href: "/privacy-policy" },
+          { label: "Terms & Conditions", href: "/terms" },
+          { label: "About Us",           href: "/about" },
+          { label: "Contact",            href: "/contact" },
+        ].map(l => (
+          <a href={l.href} style="
+            font-family:'DM Sans',sans-serif; font-size:13px;
+            color:#6b5a99; text-decoration:none;
+            transition:color 0.15s ease;
+          "
+          onmouseover="this.style.color='#c4b5fd';"
+          onmouseout="this.style.color='#6b5a99';"
+          >{l.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (max-width: 900px) { #footer-grid { grid-template-columns: 1fr 1fr !important; } }
+  @media (max-width: 600px) { #footer-grid { grid-template-columns: 1fr !important; } }
+</style>

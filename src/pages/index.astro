@@ -1,11 +1,31 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import TipCalculator from "../components/TipCalculator.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import CountryGuide from "../components/CountryGuide.astro";
+import FAQ from "../components/FAQ.astro";
+import CTABand from "../components/CTABand.astro";
+import SEOContent from "../components/SEOContent.astro";
+import QuickPageLinks from "../components/QuickPageLinks.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Tip Calculator — Free Online Tip Calculator | Real Tip Calculator"
+  description="Free tip calculator online. Instantly calculate how much to tip at restaurants, nail salons, hairdressers & more. Split the bill, choose your tip %, and get per-person totals. No signup needed."
+  canonicalPath="/"
+>
+  <Header />
+  <main id="main-content">
+    <TipCalculator />
+    <HowItWorks />
+    <SEOContent />
+    <CountryGuide />
+    <QuickPageLinks />
+    <FAQ />
+    <CTABand />
+  </main>
+  <Footer />
 </Layout>

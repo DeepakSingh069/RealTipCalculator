@@ -1,0 +1,93 @@
+---
+// QuickPageLinks.astro — visible strip on homepage linking to all pages
+---
+
+<section
+  id="quick-page-links"
+  aria-label="Site pages"
+  style="
+    background: linear-gradient(135deg, #1a1040 0%, #12093a 100%);
+    border-top: 1px solid rgba(196,181,253,0.12);
+    border-bottom: 1px solid rgba(196,181,253,0.12);
+    padding: 40px 0;
+  "
+>
+  <div class="container-site">
+    <p style="
+      font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+      color:#a78bfa; letter-spacing:2px; text-transform:uppercase;
+      text-align:center; margin:0 0 24px;
+    ">Explore Real Tip Calculator</p>
+
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    ">
+      {[
+        {
+          href: "/about",
+          icon: "🏠",
+          title: "About Us",
+          desc: "Our mission & story",
+        },
+        {
+          href: "/contact",
+          icon: "✉️",
+          title: "Contact Us",
+          desc: "Get in touch with us",
+        },
+        {
+          href: "/privacy-policy",
+          icon: "🔒",
+          title: "Privacy Policy",
+          desc: "How we protect your data",
+        },
+        {
+          href: "/terms",
+          icon: "📋",
+          title: "Terms & Conditions",
+          desc: "Usage terms & disclaimer",
+        },
+      ].map(page => (
+        <a
+          href={page.href}
+          style="
+            display: flex; align-items: center; gap: 14px;
+            background: rgba(124,58,237,0.1);
+            border: 1px solid rgba(196,181,253,0.15);
+            border-radius: 14px; padding: 18px 20px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+          "
+          onmouseover="this.style.background='rgba(124,58,237,0.2)'; this.style.borderColor='rgba(196,181,253,0.35)'; this.style.transform='translateY(-2px)';"
+          onmouseout="this.style.background='rgba(124,58,237,0.1)'; this.style.borderColor='rgba(196,181,253,0.15)'; this.style.transform='none';"
+        >
+          <span style="
+            font-size: 22px; width: 44px; height: 44px; flex-shrink: 0;
+            background: rgba(124,58,237,0.2); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+          ">{page.icon}</span>
+          <div>
+            <div style="
+              font-family:'Manrope',sans-serif; font-size:15px; font-weight:700;
+              color:#ffffff; margin-bottom:3px;
+            ">{page.title}</div>
+            <div style="
+              font-family:'DM Sans',sans-serif; font-size:13px; color:#8b75d9;
+            ">{page.desc}</div>
+          </div>
+          <svg style="margin-left:auto; flex-shrink:0; color:#a78bfa;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 640px) {
+    #quick-page-links { padding: 32px 0 !important; }
+  }
+</style>

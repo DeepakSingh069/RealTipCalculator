@@ -1,0 +1,311 @@
+---
+// FAQ.astro — SEO-optimised accordion with JSON-LD FAQPage schema
+const faqs = [
+  // ── Core calculation questions ──────────────────────────────
+  {
+    q: "How do you calculate a tip?",
+    a: "To calculate a tip, multiply your bill amount by the tip percentage divided by 100. The tip calculator formula is: <strong>Tip = Bill Amount × (Tip % ÷ 100)</strong>. For example, a 20% tip on a $50 bill = $50 × 0.20 = <strong>$10 tip</strong>, making your total $60. Our free online tip calculator does this instantly as you type — no mental math required.",
+  },
+  {
+    q: "What is a tip calculator?",
+    a: "A tip calculator is a free online tool that instantly computes the gratuity amount based on your bill total and desired tip percentage. Real Tip Calculator also includes a service quality slider, bill splitting for groups, a round-up feature, and a global tipping guide for 30+ countries — making it far more powerful than a basic tip calculator on Google.",
+  },
+  {
+    q: "How to calculate a tip if the bill is $300?",
+    a: "If your bill is $300, here's how to calculate the tip at common percentages: <strong>15% tip = $45</strong> (total $345) | <strong>18% tip = $54</strong> (total $354) | <strong>20% tip = $60</strong> (total $360) | <strong>25% tip = $75</strong> (total $375). Enter $300 into our tip calculator above to get the exact amount instantly.",
+  },
+  {
+    q: "How to calculate a tip easily?",
+    a: "The easiest way to calculate a tip is to use our free tip calculator at the top of this page — just type your bill amount and select your tip %. For quick mental math: move the decimal point one place left to get 10%, then double it for 20%. For 15%, find 10% and add half of that. For example, on a $80 bill: 10% = $8, so 20% = $16, and 15% = $12.",
+  },
+  {
+    q: "How to calculate a tip's value?",
+    a: "The tip value (gratuity amount) is calculated as: <strong>Tip Value = Bill × (Tip Percentage ÷ 100)</strong>. To also get the grand total: <strong>Total = Bill + Tip Value</strong>. If splitting: <strong>Per Person = Total ÷ Number of People</strong>. Our tip calculator shows you all three values in real time as you enter your bill.",
+  },
+  // ── Is X% a good tip? ───────────────────────────────────────
+  {
+    q: "Is tipping 20% a good tip?",
+    a: "Yes — <strong>20% is considered a good, standard tip</strong> in the United States for sit-down restaurant service. It's the most commonly expected gratuity amount for good service. For excellent or exceptional service, many people tip 25% or more. If the service was poor, 10–15% is more appropriate. Use our tip calculator to figure out exactly how much 20% of your bill is.",
+  },
+  {
+    q: "Is 10% tip insulting?",
+    a: "In the US, a <strong>10% tip can be seen as a signal that service was poor</strong>, but it's generally not considered outright insulting — it's on the low end of acceptable. For standard service, 15–20% is expected. However, in countries like the UK or Australia, 10% is perfectly normal and even generous. Always check local tipping customs when travelling.",
+  },
+  {
+    q: "Is 15% a bad tip?",
+    a: "<strong>15% is not a bad tip</strong> — it's the traditional minimum for acceptable service in the US. However, with inflation and rising expectations, 15% is now considered below average in many cities. Most servers consider 18–20% to be the current standard for good service. If you're unsure, our service quality slider automatically suggests the right percentage.",
+  },
+  {
+    q: "Is $20 a good tip for a $100 bill?",
+    a: "Yes — <strong>$20 on a $100 bill is exactly 20%</strong>, which is considered a good, generous tip for sit-down restaurant service in the US. It meets the standard expectation for solid service. If the service was exceptional, consider $25 (25%). If the service was poor, $15 (15%) would be more appropriate.",
+  },
+  {
+    q: "Should you always leave a 20% gratuity?",
+    a: "20% has become the de-facto standard tip in the US for good service, but you don't <em>always</em> have to leave exactly 20%. Tip based on service quality: 10% for poor, 15% for fair, 18% for good, 20% for great, and 25%+ for exceptional service. Our tip calculator's service quality slider helps you choose the right amount without overthinking it.",
+  },
+  // ── Tipping etiquette ────────────────────────────────────────
+  {
+    q: "Is it rude not to tip?",
+    a: "In the United States and Canada, not tipping is generally considered rude because servers rely on gratuities as a significant part of their income. In other countries (Japan, South Korea, much of Europe) not tipping is completely normal and expected. Always research local customs before you travel — our country tipping guide covers 30+ countries.",
+  },
+  {
+    q: "Is it ever OK not to tip?",
+    a: "Yes — there are situations where not tipping is acceptable: (1) Service was genuinely terrible or rude. (2) You're in a country where tipping is not customary. (3) Counter service or self-service where no table service was provided. (4) Fast food restaurants. Even in these cases, a small tip is always appreciated by service workers.",
+  },
+  {
+    q: "What happens if I don't tip in America?",
+    a: "Legally, nothing happens — tipping is voluntary in the US. However, <strong>not tipping can be seen as disrespectful</strong> to your server, since many restaurant workers are paid a reduced minimum wage with the expectation that tips will make up the difference. You may also find service is less attentive if you're a regular at an establishment. If service was poor, leaving a very small tip (10%) is generally better than leaving nothing.",
+  },
+  {
+    q: "Do you tip housekeeping on the last day?",
+    a: "Yes — but ideally you should tip <strong>every day</strong>, not just on the last day, since different housekeepers may clean your room on different days. Leave $2–5 per night on the pillow or nightstand with a note saying 'Thank you — for housekeeping.' If you tip only on the last day, it may go to the wrong staff member. The standard is $3–5 per night in the US.",
+  },
+  {
+    q: "What should you tip a driver from the airport?",
+    a: "For airport transfers and rides, the standard tip is <strong>15–20% of the fare</strong>, with a minimum of $2–5. For a rideshare like Uber or Lyft, 15–20% is appreciated. For private car services, 20% is standard. If the driver helped with heavy luggage, add an extra $1–2 per bag. Use our tip calculator to work out the exact amount from your fare.",
+  },
+  // ── India tipping questions ──────────────────────────────────
+  {
+    q: "Is ₹1,000 rupees a good tip in India?",
+    a: "Yes — <strong>₹1,000 is a very generous tip in India</strong>, especially for everyday services. For context, standard restaurant tips in India are 5–10% of the bill or simply rounding up. For luxury hotels and high-end restaurants, 10–15% is more common. A ₹1,000 tip is exceptional and would be very well received by hotel staff, tour guides, or at upscale dining.",
+  },
+  {
+    q: "Is ₹500 rupees a big tip in India?",
+    a: "Yes — <strong>₹500 is considered a generous tip in India</strong>. At most restaurants, a ₹50–₹200 tip is standard depending on the bill size. ₹500 would be appropriate for high-quality service at a mid-range to upscale restaurant, for a tour guide who spent several hours with you, or for hotel staff who provided exceptional assistance. It is above average by Indian tipping standards.",
+  },
+  // ── Specific service calculators ─────────────────────────────
+  {
+    q: "How much should you tip a hairdresser? (Hairdresser tip calculator)",
+    a: "The standard tip for a hairdresser or hair stylist is <strong>15–20% of the total service cost</strong>. For exceptional work — such as complex color treatments or a complete restyle — 20–25% is appropriate. If your stylist owns the salon, tipping is optional but still appreciated. Use our tip calculator: enter your hair service total and select 20% to get the exact tip amount.",
+  },
+  {
+    q: "How much should you tip a waitress? (Waitress tip calculator)",
+    a: "For a waitress at a sit-down restaurant, the standard tip is <strong>15–20% of the pre-tax bill</strong>. 15% for fair service, 18% for good service, 20% for great service, and 25%+ for exceptional service. For quick-service or casual dining, 10–15% is acceptable. Use our tip calculator to calculate the exact tip for any bill amount.",
+  },
+  {
+    q: "How much should you tip at a nail salon? (Nail salon tip calculator)",
+    a: "At a nail salon, the standard tip is <strong>15–20% of the service total</strong>. If your manicure costs $40, a 20% tip would be $8. For gel nails, acrylics, or more complex nail art, consider tipping 20–25%. Nail technicians often receive low base wages, so tips are an important part of their income. Enter your nail service cost into our free tip calculator for the exact amount.",
+  },
+  {
+    q: "How much should you tip a doorman in NYC? (NYC doorman tip calculator)",
+    a: "For a New York City doorman, the standard is different from restaurant tipping. For daily services, <strong>$1–5 per assistance</strong> (hailing a cab, carrying groceries) is appropriate. For annual holiday tips, NYC doormen typically receive <strong>$50–$150+</strong> depending on your building and level of service. For one-time building visitors, $2–5 for help with luggage is standard.",
+  },
+  {
+    q: "How much to tip in NYC? (Tip calculator for New York City)",
+    a: "New York City tip expectations are generally <strong>higher than the national average</strong>. Restaurants: 20–25%. Bars: $1–2 per drink. Taxis/rideshare: 15–20%. Delivery: 15–20% (minimum $3–5). Hotel housekeeping: $3–5 per night. Coat check: $1–2 per item. NYC workers depend heavily on tips, so err on the generous side.",
+  },
+  {
+    q: "How much should you tip movers? (Movers tip calculator)",
+    a: "For local moves, tip movers <strong>$20–$50 per mover</strong> for a half day, or $50–$100 per mover for a full day of work. For long-distance moves, $50–$100 per mover is standard. The tip depends on the difficulty of the move — stairs, heavy furniture, and professionalism all factor in. For a crew of 3 doing a full-day local move, budget $150–$300 total in tips.",
+  },
+  {
+    q: "How much to tip movers for a long-distance move? (Long distance movers tip calculator)",
+    a: "For long-distance moves, the standard tip is <strong>$50–$100 per mover</strong> for a multi-day job. If they pack and unpack your belongings, tip on the higher end. A typical long-distance crew of 3–4 movers could receive $200–$400 total in tips. It's common to split the tip between the pickup day crew and the delivery day crew, especially if they are different teams.",
+  },
+  {
+    q: "How much to tip an Uber driver? (Uber driver tip calculator)",
+    a: "The standard tip for an Uber driver is <strong>15–20% of the fare</strong>. For a standard trip, 15% is acceptable; for great service (clean car, friendly driver, help with luggage) tip 20%. Uber's in-app tip feature defaults to 10%, 15%, or 20%. For a $15 Uber ride, a 20% tip is $3. You can add the tip within the app up to 30 days after the trip.",
+  },
+  // ── iPhone-specific ──────────────────────────────────────────
+  {
+    q: "How to use the tip calculator on iPhone?",
+    a: "iPhones have a built-in tip calculator inside the <strong>Calculator app</strong>. Open the Calculator app, enter your bill amount, then rotate your iPhone to landscape mode to reveal the scientific calculator — swipe up on the number pad in portrait mode on newer iOS versions to access it. Alternatively, use <strong>Real Tip Calculator on your iPhone browser</strong> (realtipcalculator.com) for a much more powerful experience with bill splitting, service quality rating, and global tipping guides.",
+  },
+  {
+    q: "How to get the tip calculator on iPhone?",
+    a: "You can access a tip calculator on your iPhone in three ways: (1) <strong>Built-in Calculator app</strong> — open it and rotate to landscape for a basic tip function. (2) <strong>Real Tip Calculator website</strong> — open Safari or Chrome, go to realtipcalculator.com, and tap 'Add to Home Screen' for a native app-like experience. (3) <strong>Siri</strong> — ask 'Hey Siri, what's a 20% tip on $60?' for a quick spoken answer.",
+  },
+  // ── Takeout & tipping scenarios ──────────────────────────────
+  {
+    q: "How much should you tip for takeout? (Tip calculator for takeout)",
+    a: "Tipping for takeout is optional but increasingly common. A standard tip for takeout is <strong>10–15%</strong>. For large or complex orders, 15% is appreciated. For simple pickup orders from a counter, 10% or a small dollar amount is fine. If the restaurant is struggling or a small local business, being generous with your tip supports the staff even when you're not dining in.",
+  },
+  {
+    q: "Is tipping mandatory in other countries?",
+    a: "No — tipping customs vary drastically by country. In <strong>Japan and South Korea</strong>, tipping is considered rude and may even be refused. In <strong>Australia and New Zealand</strong>, tipping is optional but appreciated. In the <strong>UK</strong>, 10–15% is common at sit-down restaurants. In the <strong>USA and Canada</strong>, 15–20% is effectively expected. In most of <strong>Europe</strong>, rounding up the bill or leaving 5–10% is sufficient. Check our country tipping guide section for specific customs.",
+  },
+];
+---
+
+<!-- FAQ JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a.replace(/<[^>]+>/g, '')
+    }
+  }))
+})} />
+
+<section
+  id="faq"
+  aria-label="Frequently Asked Questions about tipping"
+  style="
+    background: linear-gradient(180deg, #f3f0ff 0%, #faf8ff 100%);
+    padding: 96px 0;
+  "
+>
+  <div class="container-site">
+    <div id="faq-grid" style="display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start;">
+
+      <!-- Left: sticky header -->
+      <div style="position:sticky; top:88px;">
+        <span class="section-label">❓ FAQ</span>
+        <h2 style="
+          font-family:'Manrope',sans-serif;
+          font-size:clamp(28px,3vw,36px);
+          font-weight:800; color:#1e1b4b;
+          letter-spacing:-1px; line-height:1.1;
+          margin:16px 0;
+        ">Everything about tipping</h2>
+        <p style="
+          font-family:'DM Sans',sans-serif;
+          font-size:16px; color:#6b7280;
+          line-height:1.6; margin:0 0 24px;
+        ">Common questions about tipping etiquette, math, and customs answered clearly.</p>
+
+        <!-- Quick category links -->
+        <nav aria-label="FAQ categories" style="display:flex; flex-direction:column; gap:8px;">
+          {[
+            ["#faq-0",  "🧮 How to calculate a tip"],
+            ["#faq-5",  "💯 Is X% a good tip?"],
+            ["#faq-10", "🌍 Tipping etiquette"],
+            ["#faq-15", "🇮🇳 Tipping in India"],
+            ["#faq-17", "💅 Service-specific tips"],
+            ["#faq-24", "📱 iPhone tip calculator"],
+          ].map(([href, label]) => (
+            <a href={href} style="
+              font-family:'DM Sans',sans-serif; font-size:13px;
+              color:#7c3aed; text-decoration:none;
+              display:flex; align-items:center; gap:6px;
+            "
+            onmouseover="this.style.textDecoration='underline';"
+            onmouseout="this.style.textDecoration='none';"
+            >{label}</a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Right: accordion -->
+      <div style="display:flex; flex-direction:column; gap:0;">
+        {faqs.map((item, i) => (
+          <details id={`faq-${i}`} style="border-bottom:1px solid #e5e7eb;">
+            <summary style="
+              display:flex; align-items:center;
+              justify-content:space-between; gap:16px;
+              padding:20px 0; cursor:pointer; user-select:none;
+              list-style:none;
+            ">
+              <span style="
+                font-family:'Manrope',sans-serif;
+                font-size:16px; font-weight:700;
+                color:#1e1b4b; letter-spacing:-0.2px;
+                line-height:1.4;
+              ">{item.q}</span>
+              <span class="faq-icon" aria-hidden="true" style="
+                flex-shrink:0; width:28px; height:28px;
+                border-radius:50%; border:1.5px solid #e9d5ff;
+                background:#faf8ff; display:flex;
+                align-items:center; justify-content:center;
+                color:#7c3aed; transition:all 0.2s ease;
+              ">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </span>
+            </summary>
+            <div style="
+              padding:0 0 20px;
+              font-family:'DM Sans',sans-serif;
+              font-size:15px; color:#374151;
+              line-height:1.75; max-width:560px;
+            " set:html={item.a} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Open state */
+  details[open] .faq-icon {
+    transform: rotate(180deg);
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+    color: #ffffff;
+  }
+  details[open] > summary > span:first-child {
+    color: #7c3aed;
+  }
+
+  /* Smooth open animation */
+  details > div {
+    animation: faqOpen 0.2s ease;
+  }
+  @keyframes faqOpen {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hide default marker cross-browser */
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* Dark mode */
+  [data-theme="dark"] #faq {
+    background: linear-gradient(180deg, #1a1040 0%, #12093a 100%) !important;
+  }
+  [data-theme="dark"] #faq details {
+    border-bottom-color: rgba(196,181,253,0.15) !important;
+  }
+  [data-theme="dark"] #faq details > summary > span:first-child {
+    color: #e9d5ff !important;
+  }
+  [data-theme="dark"] details[open] > summary > span:first-child {
+    color: #a78bfa !important;
+  }
+  [data-theme="dark"] .faq-icon {
+    border-color: rgba(196,181,253,0.25) !important;
+    background: rgba(124,58,237,0.15) !important;
+    color: #a78bfa !important;
+  }
+  [data-theme="dark"] details[open] .faq-icon {
+    background-color: #7c3aed !important;
+    border-color: #7c3aed !important;
+    color: #ffffff !important;
+  }
+  [data-theme="dark"] #faq div[style*="color:#374151"] {
+    color: #c4b5fd !important;
+  }
+  [data-theme="dark"] #faq h2 {
+    color: #ffffff !important;
+  }
+  [data-theme="dark"] #faq p {
+    color: #8b75d9 !important;
+  }
+  [data-theme="dark"] #faq a {
+    color: #a78bfa !important;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    #faq-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    #faq-grid > div:first-child {
+      position: static !important;
+    }
+  }
+  @media (max-width: 640px) {
+    #faq { padding: 60px 0 !important; }
+    #faq details > summary > span:first-child {
+      font-size: 14px !important;
+    }
+  }
+</style>

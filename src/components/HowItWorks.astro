@@ -1,0 +1,93 @@
+---
+const features = [
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>`,
+    gradient: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+    glow: "rgba(124,58,237,0.25)",
+    title: "Enter Your Bill",
+    description: "Type in your total bill amount and pick your currency — USD, EUR, GBP, INR and more. Works for restaurants, salons, rideshares, and any service.",
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+    gradient: "linear-gradient(135deg, #4f46e5, #7c3aed)",
+    glow: "rgba(79,70,229,0.25)",
+    title: "Rate the Service",
+    description: "Use the service quality slider — from Poor to Excellent. We automatically suggest the right tip percentage so you never have to guess.",
+  },
+  {
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    gradient: "linear-gradient(135deg, #0891b2, #06b6d4)",
+    glow: "rgba(6,182,212,0.25)",
+    title: "Split the Bill",
+    description: "Dining with a group? Instantly divide the total — tip included — between any number of people. Copy your breakdown in one click and share.",
+  },
+];
+---
+
+<section
+  id="how-it-works"
+  style="
+    background: linear-gradient(180deg, #faf8ff 0%, #f3f0ff 100%);
+    padding: 96px 0;
+    position: relative;
+    overflow: hidden;
+  "
+>
+  <!-- Background decoration -->
+  <div style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:800px; height:400px;
+    background:radial-gradient(ellipse, rgba(124,58,237,0.06) 0%, transparent 70%); pointer-events:none;"></div>
+
+  <div class="container-site" style="position:relative; z-index:1;">
+
+    <div style="text-align:center; margin-bottom:60px;">
+      <span class="section-label" style="margin-bottom:16px; display:inline-flex;">✨ How it works</span>
+      <h2 style="
+        font-family:'Manrope',sans-serif; font-size:clamp(28px,3.5vw,42px);
+        font-weight:800; color:#1e1b4b; letter-spacing:-1.2px;
+        line-height:1.08; margin:16px 0;
+      ">Three steps to the perfect tip</h2>
+      <p style="
+        font-family:'DM Sans',sans-serif; font-size:17px; color:#6b7280;
+        max-width:460px; margin:0 auto; line-height:1.65;
+      ">No math skills needed. Just enter your bill and we handle everything instantly.</p>
+    </div>
+
+    <div id="how-it-works-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      {features.map((f, i) => (
+        <div class="feature-card" style="position:relative; overflow:hidden;">
+
+          <!-- Step number watermark -->
+          <div style="
+            position:absolute; top:16px; right:20px;
+            font-family:'Manrope',sans-serif; font-size:96px; font-weight:800;
+            color:#e9d5ff; line-height:1; user-select:none; pointer-events:none;
+          ">{i+1}</div>
+
+          <!-- Icon with gradient bg + glow -->
+          <div style="
+            width:48px; height:48px; border-radius:14px;
+            background:{f.gradient};
+            box-shadow: 0 6px 20px {f.glow};
+            display:flex; align-items:center; justify-content:center;
+            margin-bottom:24px; flex-shrink:0;
+          " set:html={f.icon} />
+
+          <h3 style="
+            font-family:'Manrope',sans-serif; font-size:21px; font-weight:800;
+            color:#1e1b4b; letter-spacing:-0.4px; margin:0 0 12px;
+          ">{f.title}</h3>
+
+          <p style="
+            font-family:'DM Sans',sans-serif; font-size:15px;
+            color:#374151; line-height:1.65; margin:0;
+          ">{f.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 900px) { #how-it-works-grid { grid-template-columns: 1fr 1fr !important; } }
+  @media (max-width: 600px) { #how-it-works-grid { grid-template-columns: 1fr !important; } }
+</style>

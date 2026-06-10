@@ -1,0 +1,1081 @@
+---
+// TipCalculator — Hero (dark midnight indigo) + Calculator Card (white, violet accents)
+---
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO BAND — Deep midnight indigo, calculator card right
+════════════════════════════════════════════════════════════ -->
+<section
+  id="hero"
+  style="
+    position: relative;
+    background: linear-gradient(135deg, #0f0a1e 0%, #1a1040 40%, #251650 70%, #0f172a 100%);
+    padding: 80px 0 96px;
+    overflow: hidden;
+  "
+>
+  <!-- Background orbs / glow blobs -->
+  <div
+    style="position:absolute; inset:0; pointer-events:none; overflow:hidden;"
+  >
+    <!-- Top-left violet orb -->
+    <div
+      style="
+      position:absolute; top:-80px; left:-80px;
+      width:500px; height:500px;
+      background: radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%);
+      border-radius:50%;
+    "
+    >
+    </div>
+    <!-- Bottom-right cyan orb -->
+    <div
+      style="
+      position:absolute; bottom:-60px; right:-60px;
+      width:400px; height:400px;
+      background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 70%);
+      border-radius:50%;
+    "
+    >
+    </div>
+    <!-- Center subtle orb -->
+    <div
+      style="
+      position:absolute; top:30%; left:35%;
+      width:600px; height:400px;
+      background: radial-gradient(ellipse, rgba(109,40,217,0.12) 0%, transparent 65%);
+    "
+    >
+    </div>
+    <!-- Dot grid pattern -->
+    <div
+      style="
+      position:absolute; inset:0;
+      background-image: radial-gradient(circle, rgba(196,181,253,0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    "
+    >
+    </div>
+  </div>
+
+  <div
+    class="container-site"
+    style="
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 60px;
+      align-items: center;
+    "
+  >
+    <!-- ── Left: Headline + Trust ── -->
+    <div id="hero-headline">
+      <!-- Badge -->
+      <div id="hero-badge" style="margin-bottom: 24px;">
+        <span
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(124,58,237,0.25);
+            border: 1px solid rgba(196,181,253,0.3);
+            color: #c4b5fd;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            backdrop-filter: blur(8px);
+          "
+        >
+          <span
+            style="width:7px;height:7px;background:#10b981;border-radius:50%;display:inline-block;box-shadow:0 0 6px #10b981;"
+          ></span>
+          Free · Instant · No Signup
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1
+        id="hero-h1"
+        style="
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(36px, 4.5vw, 54px);
+          font-weight: 800;
+          color: #ffffff;
+          line-height: 1.06;
+          letter-spacing: -1px;
+          margin: 0 0 20px;
+        "
+      >
+        Calculate the
+        <span
+          style="
+            background: linear-gradient(135deg, #a78bfa, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          "
+          >Perfect Tip</span
+        >,<br />Every Time.
+      </h1>
+
+      <!-- Subheadline -->
+      <p
+        id="hero-subheadline"
+        style="
+          font-family: 'DM Sans', sans-serif;
+          font-size: 17px;
+          color: #c4b5fd;
+          line-height: 1.65;
+          margin: 0 0 36px;
+          max-width: 400px;
+        "
+      >
+        Enter your bill, rate the service quality, and split with anyone — we
+        handle all the math instantly.
+      </p>
+
+      <!-- Feature bullets -->
+      <div
+        class="feature-bullets"
+        style="display:flex; flex-direction:column; gap:12px; margin-bottom:40px;"
+      >
+        {
+          [
+            ["🎚️", "Service Quality Slider", "Auto-suggests the right tip %"],
+            ["👥", "Smart Bill Splitting", "Per-person breakdown instantly"],
+            ["🌍", "All Countries Tipping Guide", "All countries covered."],
+          ].map(([icon, title, desc]) => (
+            <div
+              class="feature-bullet"
+              style="display:flex; align-items:center; gap:12px;"
+            >
+              <span
+                class="feature-bullet-icon"
+                style="font-size:18px; width:32px; text-align:center; flex-shrink:0;"
+              >
+                {icon}
+              </span>
+              <span
+                class="feature-bullet-title"
+                style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; color:#e9d5ff;"
+              >
+                {title}
+              </span>
+              <span
+                class="feature-bullet-desc"
+                style="font-family:'DM Sans',sans-serif; font-size:14px; color:#8b75d9;"
+              >
+                — {desc}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Trust numbers -->
+      <div
+        class="trust-stats"
+        style="display:flex; gap:28px; padding-top:28px; border-top: 1px solid rgba(196,181,253,0.2);"
+      >
+        {
+          [
+            ["100%", "Free forever"],
+            ["30+", "Countries covered"],
+            ["< 1s", "Instant results"],
+          ].map(([num, label]) => (
+            <div class="trust-stat">
+              <div
+                class="trust-stat-num"
+                style="font-family:'Manrope',sans-serif; font-size:26px; font-weight:800; color:#ffffff; letter-spacing:-0.8px;"
+              >
+                {num}
+              </div>
+              <div
+                class="trust-stat-label"
+                style="font-family:'DM Sans',sans-serif; font-size:13px; color:#8b75d9; margin-top:2px;"
+              >
+                {label}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- ── Right: Calculator Card ── -->
+    <div id="calculator-card" style="position:relative;">
+      <!-- Card glow halo -->
+      <div
+        style="
+        position:absolute; inset:-3px; border-radius:20px;
+        background: linear-gradient(135deg, rgba(124,58,237,0.5), rgba(6,182,212,0.3), rgba(124,58,237,0.2));
+        filter: blur(12px);
+        z-index:0;
+      "
+      >
+      </div>
+
+      <div
+        id="calc-card-inner"
+        style="
+          position:relative; z-index:1;
+          background-color: #ffffff;
+          border-radius: 18px;
+          padding: 32px;
+          box-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.1) inset;
+        "
+      >
+        <!-- ── Bill Amount ── -->
+        <div style="margin-bottom:22px;">
+          <label
+            for="bill-amount"
+            style="
+            display:block; font-family:'DM Sans',sans-serif;
+            font-size:11px; font-weight:700; color:#7c3aed;
+            margin-bottom:8px; letter-spacing:1px; text-transform:uppercase;
+          "
+            >Bill Amount</label
+          >
+
+          <div style="display:flex; gap:8px;">
+            <!-- Currency select -->
+            <select
+              id="currency-select"
+              aria-label="Currency"
+              style="
+              background-color:#faf8ff; color:#1e1b4b;
+              font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700;
+              padding:10px 12px; height:50px; border-radius:10px;
+              border:1.5px solid #e9d5ff; outline:none; cursor:pointer; min-width:90px;
+            "
+            >
+              <option value="$">$ USD</option>
+              <option value="€">€ EUR</option>
+              <option value="£">£ GBP</option>
+              <option value="₹">₹ INR</option>
+              <option value="¥">¥ JPY</option>
+              <option value="C$">C$ CAD</option>
+              <option value="A$">A$ AUD</option>
+              <option value="₩">₩ KRW</option>
+              <option value="Fr">Fr CHF</option>
+              <option value="R">R ZAR</option>
+            </select>
+
+            <!-- Bill input -->
+            <div style="position:relative; flex:1;">
+              <span
+                id="currency-symbol-display"
+                style="
+                position:absolute; left:14px; top:50%; transform:translateY(-50%);
+                font-family:'DM Sans',sans-serif; font-size:20px; font-weight:700;
+                color:#7c3aed; pointer-events:none;
+              "
+                >$</span
+              >
+              <input
+                type="number"
+                id="bill-amount"
+                placeholder="0.00"
+                min="0"
+                step="0.01"
+                aria-label="Bill amount"
+                style="
+                  width:100%; background:#faf8ff; color:#1e1b4b;
+                  font-family:'Manrope',sans-serif; font-size:28px; font-weight:800;
+                  padding:10px 14px 10px 38px; height:50px;
+                  border-radius:10px; border:1.5px solid #e9d5ff;
+                  outline:none; transition:border-color 0.15s ease, box-shadow 0.15s ease;
+                  letter-spacing:-0.5px;
+                "
+                onfocus="this.style.borderColor='#7c3aed'; this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.12)';"
+                onblur="this.style.borderColor='#e9d5ff'; this.style.boxShadow='none';"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Service Quality Slider ── -->
+        <div style="margin-bottom:22px;">
+          <div
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"
+          >
+            <label
+              for="quality-slider"
+              style="
+              font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700;
+              color:#7c3aed; letter-spacing:1px; text-transform:uppercase;
+            "
+              >Service Quality</label
+            >
+            <span
+              id="quality-emoji-label"
+              style="
+              font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700;
+              color:#1e1b4b; display:flex; align-items:center; gap:6px;
+            "
+              >😊 Good</span
+            >
+          </div>
+
+          <input
+            type="range"
+            id="quality-slider"
+            min="0"
+            max="4"
+            step="1"
+            value="2"
+            aria-label="Service quality"
+            style="margin-bottom:8px;"
+          />
+
+          <div
+            style="display:flex; justify-content:space-between; margin-top:6px;"
+          >
+            {
+              ["Poor", "Fair", "Good", "Great", "Excellent"].map((label, i) => (
+                <span
+                  class={`quality-label ${i === 2 ? "active" : ""}`}
+                  data-quality-index={i}
+                >
+                  {label}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- ── Tip % Presets ── -->
+        <div style="margin-bottom:22px;">
+          <label
+            style="
+            display:block; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700;
+            color:#7c3aed; margin-bottom:10px; letter-spacing:1px; text-transform:uppercase;
+          "
+            >Tip Percentage</label
+          >
+
+          <div
+            style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"
+          >
+            {
+              [10, 15, 18, 20, 25].map((pct) => (
+                <button
+                  class={`tip-preset ${pct === 18 ? "active" : ""}`}
+                  data-tip={pct}
+                  id={`preset-${pct}`}
+                  aria-label={`${pct}% tip`}
+                  aria-pressed={pct === 18 ? "true" : "false"}
+                >
+                  {pct}%
+                </button>
+              ))
+            }
+            <div
+              style="display:flex; align-items:center; gap:4px; flex:1; min-width:80px;"
+            >
+              <input
+                type="number"
+                id="custom-tip-input"
+                min="0"
+                max="100"
+                placeholder="Custom"
+                aria-label="Custom tip percentage"
+                style="
+                  width:100%; background:#faf8ff; color:#1e1b4b;
+                  font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600;
+                  padding:8px 10px; height:38px; border-radius:8px;
+                  border:1.5px solid #e9d5ff; outline:none; transition:border-color 0.15s ease;
+                "
+                onfocus="this.style.borderColor='#7c3aed';"
+                onblur="this.style.borderColor='#e9d5ff';"
+              />
+              <span
+                style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; color:#6b7280; flex-shrink:0;"
+                >%</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Live Result Card ── -->
+        <div
+          id="result-card"
+          style="
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #0891b2 100%);
+            border-radius:14px; padding:24px; margin-bottom:14px;
+            display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;
+            position:relative; overflow:hidden;
+          "
+        >
+          <!-- Subtle shine overlay -->
+          <div
+            style="
+            position:absolute; top:-40px; right:-20px;
+            width:150px; height:150px;
+            background:radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+            border-radius:50%; pointer-events:none;
+          "
+          >
+          </div>
+
+          {
+            [
+              ["Tip Amount", "result-tip", "$0.00"],
+              ["Total Bill", "result-total", "$0.00"],
+              ["Per Person", "result-per-person", "$0.00"],
+            ].map(([label, id, init]) => (
+              <div style="text-align:center; padding:8px 4px;">
+                <div
+                  style="
+                font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600;
+                color:rgba(255,255,255,0.6); margin-bottom:6px;
+                text-transform:uppercase; letter-spacing:0.6px;
+              "
+                >
+                  {label}
+                </div>
+                <div
+                  id={id}
+                  style="
+                  font-family:'Manrope',sans-serif;
+                  font-size:clamp(18px,2.5vw,24px);
+                  font-weight:800; color:#ffffff; letter-spacing:-0.5px;
+                  min-height:32px; text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+                "
+                >
+                  {init}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Round-up suggestion -->
+        <div
+          id="roundup-strip"
+          style="
+            display:none;
+            background:linear-gradient(135deg,#fef3c7,#fff7ed);
+            border:1.5px solid #fde68a;
+            border-radius:10px; padding:12px 16px; margin-bottom:18px;
+            align-items:center; justify-content:space-between; gap:12px;
+          "
+        >
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:16px;">💡</span>
+            <span
+              id="roundup-text"
+              style="font-family:'DM Sans',sans-serif; font-size:13px; color:#92400e;"
+            ></span>
+          </div>
+          <button
+            id="apply-roundup-btn"
+            style="
+              font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700;
+              color:#92400e; background:#fde68a; border:none; border-radius:6px;
+              padding:6px 14px; cursor:pointer; white-space:nowrap; flex-shrink:0;
+              transition:background 0.12s ease;
+            "
+            onmouseover="this.style.background='#fbbf24';"
+            onmouseout="this.style.background='#fde68a';">Apply</button
+          >
+        </div>
+
+        <!-- ── Split Bill ── -->
+        <div>
+          <div
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"
+          >
+            <label
+              style="
+              font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700;
+              color:#7c3aed; letter-spacing:1px; text-transform:uppercase;
+            "
+              >Split Between</label
+            >
+
+            <!-- Stepper -->
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button
+                id="people-minus"
+                aria-label="Decrease number of people"
+                style="
+                  width:34px; height:34px; border-radius:50%;
+                  border:1.5px solid #e9d5ff; background:#faf8ff; cursor:pointer;
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:18px; color:#7c3aed; transition:all 0.12s ease; line-height:1;
+                "
+                onmouseover="this.style.background='#ede9fe'; this.style.borderColor='#7c3aed';"
+                onmouseout="this.style.background='#faf8ff'; this.style.borderColor='#e9d5ff';"
+                >−</button
+              >
+
+              <span
+                id="people-count-display"
+                style="
+                font-family:'Manrope',sans-serif; font-size:22px; font-weight:800;
+                color:#1e1b4b; min-width:32px; text-align:center;
+              "
+                >1</span
+              >
+
+              <button
+                id="people-plus"
+                aria-label="Increase number of people"
+                style="
+                  width:34px; height:34px; border-radius:50%;
+                  border:1.5px solid #e9d5ff; background:#faf8ff; cursor:pointer;
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:18px; color:#7c3aed; transition:all 0.12s ease; line-height:1;
+                "
+                onmouseover="this.style.background='#ede9fe'; this.style.borderColor='#7c3aed';"
+                onmouseout="this.style.background='#faf8ff'; this.style.borderColor='#e9d5ff';"
+                >+</button
+              >
+
+              <span
+                style="font-family:'DM Sans',sans-serif; font-size:14px; color:#9ca3af;"
+                >people</span
+              >
+            </div>
+          </div>
+
+          <!-- Per-person breakdown -->
+          <div
+            id="per-person-breakdown"
+            style="
+              display:none; background:linear-gradient(135deg,#faf8ff,#f0f9ff);
+              border:1.5px solid #e9d5ff; border-radius:10px; padding:16px; margin-bottom:14px;
+            "
+          >
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div>
+                <div
+                  style="font-family:'DM Sans',sans-serif; font-size:11px; color:#7c3aed; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.6px; font-weight:700;"
+                >
+                  Each pays (bill)
+                </div>
+                <div
+                  id="per-person-bill"
+                  style="font-family:'Manrope',sans-serif; font-size:20px; font-weight:800; color:#1e1b4b; letter-spacing:-0.5px;"
+                >
+                  $0.00
+                </div>
+              </div>
+              <div>
+                <div
+                  style="font-family:'DM Sans',sans-serif; font-size:11px; color:#06b6d4; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.6px; font-weight:700;"
+                >
+                  Each pays (tip)
+                </div>
+                <div
+                  id="per-person-tip"
+                  style="font-family:'Manrope',sans-serif; font-size:20px; font-weight:800; color:#1e1b4b; letter-spacing:-0.5px;"
+                >
+                  $0.00
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy breakdown -->
+          <button
+            id="copy-breakdown-btn"
+            style="
+              width:100%; display:flex; align-items:center; justify-content:center; gap:8px;
+              font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600;
+              color:#7c3aed; background:#faf8ff; border:1.5px solid #e9d5ff;
+              border-radius:10px; padding:11px 20px; height:44px; cursor:pointer;
+              transition:all 0.15s ease;
+            "
+            onmouseover="this.style.background='#ede9fe'; this.style.borderColor='#7c3aed';"
+            onmouseout="this.style.background='#faf8ff'; this.style.borderColor='#e9d5ff';"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2"></rect><path
+                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              ></path>
+            </svg>
+            <span id="copy-btn-text">Copy Breakdown</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end calculator card -->
+  </div>
+</section>
+
+<!-- ─── Calculator Logic ──────────────────────────────────── -->
+<script>
+  const QUALITY_LEVELS = [
+    { label: "Poor", emoji: "😞", tip: 10 },
+    { label: "Fair", emoji: "😐", tip: 15 },
+    { label: "Good", emoji: "😊", tip: 18 },
+    { label: "Great", emoji: "😄", tip: 20 },
+    { label: "Excellent", emoji: "🤩", tip: 25 },
+  ];
+
+  let bill = 0,
+    tipPct = 18,
+    people = 1,
+    currency = "$";
+
+  const billInput = document.getElementById("bill-amount") as HTMLInputElement;
+  const currencySelect = document.getElementById(
+    "currency-select",
+  ) as HTMLSelectElement;
+  const currencySymbol = document.getElementById("currency-symbol-display")!;
+  const qualitySlider = document.getElementById(
+    "quality-slider",
+  ) as HTMLInputElement;
+  const qualityLabel = document.getElementById("quality-emoji-label")!;
+  const customTipInput = document.getElementById(
+    "custom-tip-input",
+  ) as HTMLInputElement;
+  const presetBtns =
+    document.querySelectorAll<HTMLButtonElement>(".tip-preset");
+  const resultTip = document.getElementById("result-tip")!;
+  const resultTotal = document.getElementById("result-total")!;
+  const resultPP = document.getElementById("result-per-person")!;
+  const roundupStrip = document.getElementById("roundup-strip")!;
+  const roundupText = document.getElementById("roundup-text")!;
+  const applyRoundup = document.getElementById("apply-roundup-btn")!;
+  const peopleMinus = document.getElementById("people-minus")!;
+  const peoplePlus = document.getElementById("people-plus")!;
+  const peopleDisplay = document.getElementById("people-count-display")!;
+  const ppBreakdown = document.getElementById("per-person-breakdown")!;
+  const ppBill = document.getElementById("per-person-bill")!;
+  const ppTip = document.getElementById("per-person-tip")!;
+  const copyBtn = document.getElementById("copy-breakdown-btn")!;
+  const copyBtnText = document.getElementById("copy-btn-text")!;
+  const qualityLabels =
+    document.querySelectorAll<HTMLSpanElement>(".quality-label");
+
+  function fmt(v: number) {
+    // Locale-format so large numbers get commas: $1,250.00
+    return (
+      currency +
+      v.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+    );
+  }
+
+  function animateValue(el: Element, val: string) {
+    el.classList.remove("animate-result");
+    void (el as HTMLElement).offsetWidth;
+    el.textContent = val;
+    el.classList.add("animate-result");
+  }
+
+  function updateSliderTrack() {
+    const pct = (Number(qualitySlider.value) / 4) * 100;
+    qualitySlider.style.setProperty("--slider-pct", `${pct}%`);
+  }
+
+  function calculate() {
+    const tipAmount = bill * (tipPct / 100);
+    const total = bill + tipAmount;
+    const perPerson = people > 0 ? total / people : total;
+    const perBill = people > 0 ? bill / people : bill;
+    const perTipPP = people > 0 ? tipAmount / people : tipAmount;
+
+    animateValue(resultTip, fmt(tipAmount));
+    animateValue(resultTotal, fmt(total));
+    animateValue(resultPP, fmt(perPerson));
+
+    if (people > 1) {
+      ppBreakdown.style.display = "block";
+      animateValue(ppBill, fmt(perBill));
+      animateValue(ppTip, fmt(perTipPP));
+    } else {
+      ppBreakdown.style.display = "none";
+    }
+
+    if (bill > 0) {
+      const nearest5 = Math.ceil(total / 5) * 5;
+      const roundedPP = people > 1 ? nearest5 / people : nearest5;
+      if (nearest5 > total) {
+        const ppNote = people > 1 ? ` (${fmt(roundedPP)}/person)` : "";
+        roundupText.textContent = `Round up to ${fmt(nearest5)}${ppNote} — only ${fmt(nearest5 - total)} extra!`;
+        roundupStrip.style.display = "flex";
+        applyRoundup.dataset.roundedTotal = String(nearest5);
+      } else {
+        roundupStrip.style.display = "none";
+      }
+    } else {
+      roundupStrip.style.display = "none";
+    }
+  }
+
+  function setTip(pct: number, skipPresetUpdate = false) {
+    tipPct = pct;
+    if (!skipPresetUpdate) {
+      presetBtns.forEach((btn) => {
+        const isActive = Number(btn.dataset.tip) === pct;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+    calculate();
+  }
+
+  function updateQuality(idx: number) {
+    const q = QUALITY_LEVELS[idx];
+    qualityLabel.textContent = `${q.emoji} ${q.label}`;
+    qualityLabels.forEach((el, i) => el.classList.toggle("active", i === idx));
+    updateSliderTrack();
+    setTip(q.tip);
+  }
+
+  billInput.addEventListener("input", () => {
+    bill = parseFloat(billInput.value) || 0;
+    calculate();
+  });
+  currencySelect.addEventListener("change", () => {
+    currency = currencySelect.value.split(" ")[0];
+    currencySymbol.textContent = currency;
+    calculate();
+  });
+  qualitySlider.addEventListener("input", () =>
+    updateQuality(Number(qualitySlider.value)),
+  );
+  qualityLabels.forEach((el) => {
+    el.addEventListener("click", () => {
+      const idx = Number(el.dataset.qualityIndex);
+      qualitySlider.value = String(idx);
+      updateQuality(idx);
+    });
+  });
+  presetBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      customTipInput.value = "";
+      setTip(Number(btn.dataset.tip));
+    });
+  });
+  customTipInput.addEventListener("input", () => {
+    const val = parseFloat(customTipInput.value);
+    if (!isNaN(val) && val >= 0) {
+      setTip(val, true);
+      presetBtns.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
+    }
+  });
+  peopleMinus.addEventListener("click", () => {
+    if (people > 1) {
+      people--;
+      peopleDisplay.textContent = String(people);
+      calculate();
+    }
+  });
+  peoplePlus.addEventListener("click", () => {
+    if (people < 50) {
+      people++;
+      peopleDisplay.textContent = String(people);
+      calculate();
+    }
+  });
+  applyRoundup.addEventListener("click", () => {
+    const rt = parseFloat(applyRoundup.dataset.roundedTotal || "0");
+    const impliedPct = bill > 0 ? ((rt - bill) / bill) * 100 : tipPct;
+    customTipInput.value = impliedPct.toFixed(1);
+    presetBtns.forEach((b) => {
+      b.classList.remove("active");
+      b.setAttribute("aria-pressed", "false");
+    });
+    setTip(impliedPct, true);
+  });
+  copyBtn.addEventListener("click", () => {
+    const tipAmt = (bill * (tipPct / 100)).toFixed(2);
+    const totalAmt = (bill + bill * (tipPct / 100)).toFixed(2);
+    const ppAmt = (parseFloat(totalAmt) / people).toFixed(2);
+    const ppTipAmt = ((bill * (tipPct / 100)) / people).toFixed(2);
+    const text = [
+      `🧾 Tip Breakdown — Real Tip Calculator`,
+      `Bill: ${currency}${bill.toFixed(2)}`,
+      `Tip (${tipPct}%): ${currency}${tipAmt}`,
+      `Total: ${currency}${totalAmt}`,
+      people > 1
+        ? `Split (${people} people): ${currency}${ppAmt}/person (incl. ${currency}${ppTipAmt} tip)`
+        : "",
+      `\nCalculated at realtipcalculator.com`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtnText.textContent = "Copied! ✓";
+      setTimeout(() => {
+        copyBtnText.textContent = "Copy Breakdown";
+      }, 2500);
+    });
+  });
+
+  updateQuality(2);
+  updateSliderTrack();
+  calculate();
+</script>
+
+<style>
+  /* ── Tablet: stack hero grid ─────────────────────────────────── */
+  @media (max-width: 960px) {
+    #hero > div {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+    #hero-headline {
+      max-width: 100% !important;
+    }
+    #calculator-card {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Headline: center-align when stacked */
+    #hero-headline {
+      text-align: center;
+    }
+    #hero-headline p {
+      max-width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    /* Feature bullets: center when stacked */
+    /* Center the entire headline section when stacked */
+    #hero-headline {
+      text-align: center;
+    }
+    /* Subheadline: full width, centered */
+    #hero-subheadline {
+      max-width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    /* Feature bullets: center each pill row */
+    .feature-bullet {
+      justify-content: center;
+    }
+    /* Trust stats: center */
+    .trust-stats {
+      justify-content: center !important;
+    }
+  }
+
+  /* ── Mobile medium (≤ 640px) ─────────────────────────────────── */
+  @media (max-width: 640px) {
+    #hero {
+      padding: 48px 0 56px !important;
+    }
+
+    /* ── Hero headline: mobile overhaul ── */
+
+    /* Badge */
+    #hero-badge {
+      margin-bottom: 14px !important;
+    }
+
+    /* h1: fluid size, tighter spacing */
+    #hero-h1 {
+      font-size: clamp(28px, 8vw, 40px) !important;
+      letter-spacing: -0.5px !important;
+      line-height: 1.12 !important;
+      margin-bottom: 12px !important;
+    }
+
+    /* Subheadline */
+    #hero-subheadline {
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 22px !important;
+      max-width: 100% !important;
+      color: #b4a0e8 !important;
+    }
+
+    /* Feature bullets: pill card layout, centered content */
+    .feature-bullets {
+      gap: 8px !important;
+      margin-bottom: 22px !important;
+    }
+    .feature-bullet {
+      background: rgba(124, 58, 237, 0.12) !important;
+      border: 1px solid rgba(196, 181, 253, 0.18) !important;
+      border-radius: 12px !important;
+      padding: 10px 16px !important;
+      gap: 10px !important;
+      justify-content: center !important;
+    }
+    .feature-bullet-icon {
+      font-size: 16px !important;
+      width: 22px !important;
+    }
+    .feature-bullet-title {
+      font-size: 13px !important;
+      font-weight: 700 !important;
+    }
+    .feature-bullet-desc {
+      display: none !important;
+    }
+
+    /* Trust stats: redesign as a glass card with internal dividers */
+    .trust-stats {
+      background: rgba(124, 58, 237, 0.08) !important;
+      border: 1px solid rgba(196, 181, 253, 0.15) !important;
+      border-radius: 14px !important;
+      padding: 16px 12px !important;
+      gap: 0 !important;
+      justify-content: space-evenly !important;
+      border-top-style: none !important;
+    }
+    .trust-stat {
+      flex: 1;
+      text-align: center;
+      padding: 0 12px;
+    }
+    .trust-stat:not(:last-child) {
+      border-right: 1px solid rgba(196, 181, 253, 0.2);
+    }
+    .trust-stat-num {
+      font-size: 20px !important;
+      letter-spacing: -0.4px !important;
+    }
+    .trust-stat-label {
+      font-size: 11px !important;
+      color: #a48fd0 !important;
+    }
+
+    /* Card padding */
+    #calc-card-inner {
+      padding: 20px !important;
+    }
+
+    /* Bill input: smaller font so large amounts don't overflow */
+    #bill-amount {
+      font-size: 20px !important;
+      height: 46px !important;
+      padding-left: 34px !important;
+    }
+    #currency-symbol-display {
+      font-size: 17px !important;
+    }
+    #currency-select {
+      height: 46px !important;
+      min-width: 76px !important;
+      font-size: 12px !important;
+      padding: 8px 8px !important;
+    }
+
+    /* Result card: prevent overflow on 3-col grid */
+    #result-card {
+      padding: 16px 6px !important;
+      gap: 0 !important;
+    }
+    #result-tip,
+    #result-total,
+    #result-per-person {
+      font-size: clamp(12px, 3.8vw, 18px) !important;
+      letter-spacing: -0.3px !important;
+      word-break: break-all;
+    }
+    #result-card > div > div:first-child {
+      font-size: 9px !important;
+      letter-spacing: 0.3px !important;
+    }
+
+    /* Per-person breakdown values */
+    #per-person-bill,
+    #per-person-tip {
+      font-size: 16px !important;
+    }
+
+    /* People stepper */
+    #people-count-display {
+      font-size: 18px !important;
+    }
+    #people-minus,
+    #people-plus {
+      width: 30px !important;
+      height: 30px !important;
+      font-size: 16px !important;
+    }
+
+    /* Tip presets: wrap nicely on small screens */
+    .tip-preset {
+      padding: 7px 10px !important;
+      font-size: 13px !important;
+      height: 34px !important;
+    }
+    #custom-tip-input {
+      height: 34px !important;
+      font-size: 13px !important;
+    }
+
+    /* Copy button */
+    #copy-breakdown-btn {
+      height: 40px !important;
+      font-size: 13px !important;
+    }
+  }
+
+  /* ── Mobile small (≤ 400px) ──────────────────────────────────── */
+  @media (max-width: 400px) {
+    #calc-card-inner {
+      padding: 16px !important;
+    }
+
+    /* Headline even tighter on very small phones */
+    #hero-headline h1 {
+      font-size: clamp(26px, 7.5vw, 34px) !important;
+      letter-spacing: 0px !important;
+    }
+    #hero-headline p {
+      font-size: 14px !important;
+      margin-bottom: 20px !important;
+    }
+    #hero-headline > div[style*="flex-direction:column"] {
+      gap: 6px !important;
+      margin-bottom: 20px !important;
+    }
+    /* Emoji icons: slightly smaller */
+    #hero-headline span[style*="font-size:18px"] {
+      font-size: 15px !important;
+      width: 24px !important;
+    }
+    /* Trust number stats */
+    #hero-headline > div[style*="border-top"] > div > div:first-child {
+      font-size: 20px !important;
+    }
+
+    #bill-amount {
+      font-size: 18px !important;
+      padding-left: 30px !important;
+    }
+    #currency-symbol-display {
+      font-size: 15px !important;
+    }
+
+    #result-tip,
+    #result-total,
+    #result-per-person {
+      font-size: clamp(11px, 3.5vw, 16px) !important;
+    }
+
+    /* Quality labels: smaller on very small screens */
+    .quality-label {
+      font-size: 10px !important;
+    }
+  }
+</style>

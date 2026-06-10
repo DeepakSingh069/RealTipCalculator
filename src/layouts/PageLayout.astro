@@ -1,0 +1,155 @@
+---
+// PageLayout.astro — shared layout for all inner pages (About, Privacy, Terms, Contact)
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  breadcrumb?: string;
+}
+
+const { title, description, canonicalPath = '', breadcrumb = title } = Astro.props;
+---
+
+<Layout title={title} description={description} canonicalPath={canonicalPath}>
+  <Header />
+  <main id="main-content">
+    <!-- Page hero / breadcrumb -->
+    <div style="
+      background: linear-gradient(135deg, #0f0a1e 0%, #1a1040 60%, #12093a 100%);
+      padding: 72px 0 56px;
+      border-bottom: 1px solid rgba(196,181,253,0.1);
+      position: relative;
+      overflow: hidden;
+    ">
+      <!-- Background orb -->
+      <div style="position:absolute; top:-60px; right:-60px; width:400px; height:400px;
+        background:radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+        pointer-events:none;"></div>
+
+      <div class="container-site" style="position:relative; z-index:1;">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" style="margin-bottom:16px;">
+          <ol style="display:flex; align-items:center; gap:8px; list-style:none; padding:0; margin:0;">
+            <li>
+              <a href="/" style="font-family:'DM Sans',sans-serif; font-size:13px; color:#8b75d9; text-decoration:none;"
+                onmouseover="this.style.color='#c4b5fd';" onmouseout="this.style.color='#8b75d9';">
+                Home
+              </a>
+            </li>
+            <li style="color:#5b4b8a; font-size:13px;">›</li>
+            <li style="font-family:'DM Sans',sans-serif; font-size:13px; color:#c4b5fd;">{breadcrumb}</li>
+          </ol>
+        </nav>
+
+        <h1 style="
+          font-family:'Manrope',sans-serif;
+          font-size:clamp(30px,5vw,48px);
+          font-weight:800; color:#ffffff;
+          letter-spacing:-1px; line-height:1.1;
+          margin:0 0 16px;
+        ">{breadcrumb}</h1>
+        <p style="
+          font-family:'DM Sans',sans-serif;
+          font-size:16px; color:#8b75d9; margin:0;
+        ">{description}</p>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div style="
+      background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+      min-height: 60vh;
+      padding: 64px 0 96px;
+    ">
+      <div class="container-site" style="max-width:820px; margin:0 auto;">
+        <slot />
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* Dark mode inner page */
+  [data-theme="dark"] main > div:nth-child(2) {
+    background: linear-gradient(180deg, #12093a 0%, #0f0a1e 100%) !important;
+  }
+
+  /* Prose styles */
+  .prose h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 800;
+    color: #1e1b4b;
+    letter-spacing: -0.5px;
+    margin: 48px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e9d5ff;
+  }
+  .prose h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin: 28px 0 10px;
+  }
+  .prose p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: #374151;
+    line-height: 1.8;
+    margin: 0 0 18px;
+  }
+  .prose ul, .prose ol {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: #374151;
+    line-height: 1.75;
+    margin: 0 0 18px;
+    padding-left: 24px;
+  }
+  .prose li { margin-bottom: 8px; }
+  .prose a {
+    color: #7c3aed;
+    text-decoration: underline;
+    text-decoration-color: #e9d5ff;
+  }
+  .prose a:hover { text-decoration-color: #7c3aed; }
+  .prose strong { color: #1e1b4b; font-weight: 700; }
+  .prose .last-updated {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 40px;
+    display: block;
+  }
+  .prose .highlight-box {
+    background: linear-gradient(135deg, #faf8ff, #f3f0ff);
+    border: 1px solid #e9d5ff;
+    border-left: 4px solid #7c3aed;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .prose .highlight-box p { margin: 0; color: #1e1b4b; }
+
+  /* Dark mode prose */
+  [data-theme="dark"] .prose h2 {
+    color: #e9d5ff !important;
+    border-bottom-color: rgba(196,181,253,0.2) !important;
+  }
+  [data-theme="dark"] .prose h3 { color: #c4b5fd !important; }
+  [data-theme="dark"] .prose p,
+  [data-theme="dark"] .prose li { color: #a78bfa !important; }
+  [data-theme="dark"] .prose strong { color: #e9d5ff !important; }
+  [data-theme="dark"] .prose .highlight-box {
+    background: rgba(124,58,237,0.1) !important;
+    border-color: rgba(196,181,253,0.2) !important;
+    border-left-color: #7c3aed !important;
+  }
+  [data-theme="dark"] .prose .highlight-box p { color: #e9d5ff !important; }
+</style>
